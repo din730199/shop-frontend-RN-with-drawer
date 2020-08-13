@@ -102,7 +102,7 @@ export default class Info extends Component {
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.infoContainer}>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-person'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-person'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="name"
@@ -111,7 +111,7 @@ export default class Info extends Component {
               underlineColorAndroid="transparent"/>
           </View>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-mail'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-mail'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="email"
@@ -120,7 +120,7 @@ export default class Info extends Component {
               underlineColorAndroid="transparent"/>
           </View>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'ios-navigate'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'ios-navigate'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="address"
@@ -129,7 +129,7 @@ export default class Info extends Component {
               underlineColorAndroid="transparent"/>
           </View>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'ios-call'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'ios-call'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="numberphone"
@@ -153,7 +153,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   wrapperHeader: { 
       height: height / 15, 
-      backgroundColor: '#2c77ad', 
+      backgroundColor: '#faaca8', 
       justifyContent: 'space-around' 
   },
   rowHeader: { flexDirection: 'row', justifyContent: 'space-around', alignItems:'center' },
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 10,
     marginTop: 0,
-    backgroundColor: '#2c77ad',
+    backgroundColor: '#faaca8',
     borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center'

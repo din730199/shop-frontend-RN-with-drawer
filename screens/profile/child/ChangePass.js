@@ -70,7 +70,7 @@ export default class Info extends Component {
         <ScrollView>
         <View style={styles.infoContainer}>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-unlock'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-unlock'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="old"
@@ -79,7 +79,7 @@ export default class Info extends Component {
               underlineColorAndroid="transparent"/>
           </View>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-unlock'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-unlock'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
               placeholder="new"
@@ -102,7 +102,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   wrapperHeader: { 
       height: height / 15, 
-      backgroundColor: '#2c77ad', 
+      backgroundColor: '#faaca8', 
       justifyContent: 'space-around' 
   },
   rowHeader: { flexDirection: 'row', justifyContent: 'space-around', alignItems:'center' },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 10,
     marginTop: 0,
-    backgroundColor: '#2c77ad',
+    backgroundColor: '#faaca8',
     borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center'

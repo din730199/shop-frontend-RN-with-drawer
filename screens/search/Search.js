@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         height: 50,
         margin: 10,
         marginTop: 0,
-        backgroundColor: '#2c77ad',
+        backgroundColor: '#faaca8',
         borderRadius: 2,
         alignItems: 'center',
         justifyContent: 'center'
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     wrapperH: { 
       height: height / 9, 
-      backgroundColor: '#2c77ad', 
+      backgroundColor: '#faaca8', 
       padding: height/80, 
       justifyContent: 'space-around' 
   },
@@ -153,6 +153,6 @@ producePrice: {
     marginBottom: 5,
     paddingLeft: 10,
     fontFamily: 'Avenir',
-    color: '#e52c2cad'
+    color: '#faaca8'
 }
 });

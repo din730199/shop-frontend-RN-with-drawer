@@ -29,19 +29,19 @@ export default class Profile extends Component {
         <View style={{flex:1}} />
         <View style={styles.infoContainer}>
           <View onPress={() => this.props.navigation.navigate("Info")} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-person'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-person'} size={25} color={'#faaca8'} />
             <Text style={styles.infoText}> Đinh Thành Nhân </Text>
           </View>
           <View onPress={() => this.props.navigation.navigate("ChangePass")} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-mail'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'md-mail'} size={25} color={'#faaca8'} />
             <Text style={styles.infoText}> dinhnhan3007@gmail.com </Text>
           </View>
           <View onPress={() => this.props.navigation.navigate("Bill")} style={styles.rowInfoContainer}>
-            <Ionicons name={'ios-call'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'ios-call'} size={25} color={'#faaca8'} />
             <Text style={styles.infoText}> (+84) 708633859 </Text>
           </View>
           <View onPress={() => this.props.navigation.navigate("Contact")} style={styles.rowInfoContainer}>
-            <Ionicons name={'ios-navigate'} size={25} color={'#2c77ad'} />
+            <Ionicons name={'ios-navigate'} size={25} color={'#faaca8'} />
             <Text style={styles.infoText}> Bình Sơn - Long Thành - Đồng Nai </Text>
           </View>
         </View>
@@ -55,7 +55,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   wrapperHeader: { 
     height: height / 15, 
-    backgroundColor: '#2c77ad', 
+    backgroundColor: '#faaca8', 
     justifyContent: 'space-around' 
 },
 rowHeader: { flexDirection: 'row', justifyContent: 'space-around', alignItems:'center' },

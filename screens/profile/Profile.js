@@ -1,80 +1,189 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React, {Component} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 
-import Header from '../header/Header'
+import Header from '../header/Header';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Avatar, Title, Caption, Drawer} from 'react-native-paper';
+import axios from 'axios';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Profile extends Component {
-  static navigationOptions = {
-    headerShown: false
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
+  static navigationOptions = ({navigation}) => {
+    return {
+      header: () => (
+        <Header
+          openDrawer={() => navigation.openDrawer()}
+          navigation={() => navigation.navigate('Search')}
+        />
+      ),
     };
+  };
+
+  state = {
+    name: '',
+    email: '',
+    token: '',
+  };
+
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem('token');
+    this.setState({token: token});
+
+    this.getInfo(token);
   }
 
-  logout = async ()=>{
-    await AsyncStorage.removeItem('token')
-    this.props.navigation.navigate("Authentication")
+  async componentDidUpdate(prevProps, prevState) {
+    const token = await AsyncStorage.getItem('token');
+    if (prevState.token !== token) {
+      this.setState({token: token});
+
+      this.getInfo(token);
+    }
   }
+
+  getInfo = async token => {
+    axios({
+      url: `https://mainf-app.herokuapp.com/api/users/getInfoUser`,
+      headers: {
+        'auth-token': token,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        this.setState({
+          name: res.data.data.name,
+          email: res.data.data.email,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  logout = async () => {
+    await AsyncStorage.removeItem('token');
+    this.setState({token: ''});
+    this.props.navigation.navigate('Authentication');
+  };
 
   render() {
-    return (
-      <View style={styles.wrapper}>
-        <Header title={'DRESS FOR YOU'}/>
-        <View style={styles.infoContainer}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Info")} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-person'} size={25} color={'#2c77ad'} />
-            <Text style={styles.infoText}> Thông tin cá nhân </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("ChangePass")} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-lock'} size={25} color={'#2c77ad'} />
-            <Text style={styles.infoText}> Đổi mật khẩu </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Bill")} style={styles.rowInfoContainer}>
-            <Ionicons name={'ios-list-box'} size={25} color={'#2c77ad'} />
-            <Text style={styles.infoText}> Hóa đơn </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("Contact")} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-information-circle'} size={25} color={'#2c77ad'} />
-            <Text style={styles.infoText}> Thông tin liên hệ </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.logout} style={styles.rowInfoContainer}>
-            <Ionicons name={'md-exit'} size={25} color={'#2c77ad'} />
-            <Text style={styles.infoText}> Đăng xuất </Text>
-          </TouchableOpacity>
+    const loginJSX = (
+      <View style={{flex: 1}}>
+        <View style={styles.drawerContent}>
+          <View style={styles.userInfoSection}>
+            <View style={{flexDirection: 'row', marginTop: 15}}>
+              <Avatar.Image
+                source={{
+                  uri:
+                    'https://previews.123rf.com/images/arhimicrostok/arhimicrostok1709/arhimicrostok170901259/86905920-connection-mark-user-sign-icon-person-symbol-human-avatar-flat-style-.jpg',
+                }}
+                size={70}
+              />
+              <View style={{marginLeft: 15, flexDirection: 'column'}}>
+                <Title style={styles.title}>{this.state.name}</Title>
+                <Caption style={styles.caption}>{this.state.email}</Caption>
+              </View>
+            </View>
+          </View>
+          <Drawer.Section style={styles.drawerSection}>
+            <Drawer.Item
+              icon={({color, size}) => (
+                <Ionicons name="md-person" color="#faaca8" size={size} />
+              )}
+              label="Thông tin cá nhân"
+              onPress={() => this.props.navigation.navigate('Info')}
+            />
+            <Drawer.Item
+              icon={({color, size}) => (
+                <Ionicons name="md-lock" color="#faaca8" size={size} />
+              )}
+              label="Đổi mật khẩu"
+              onPress={() => this.props.navigation.navigate('ChangePass')}
+            />
+            <Drawer.Item
+              icon={({color, size}) => (
+                <Ionicons name="ios-list-box" color="#faaca8" size={size} />
+              )}
+              label="Hóa đơn"
+              onPress={() => this.props.navigation.navigate('Bill')}
+            />
+            <Drawer.Item
+              icon={({color, size}) => (
+                <Ionicons
+                  name="md-information-circle"
+                  color="#faaca8"
+                  size={size}
+                />
+              )}
+              label="Thông tin liên hệ"
+              onPress={() => this.props.navigation.navigate('Contact')}
+            />
+          </Drawer.Section>
         </View>
-        <View style={{flex:2}} />
+        <Drawer.Section style={styles.bottomDrawerSection}>
+          <Drawer.Item
+            icon={({color, size}) => (
+              <Icon name="exit-to-app" color="#faaca8" size={size} />
+            )}
+            label="Đăng xuất"
+            onPress={this.logout}
+          />
+        </Drawer.Section>
       </View>
     );
+    const logoutJSX = (
+      <View style={styles.drawerContent}>
+        <View style={styles.userInfoSection}>
+          <View style={{flexDirection: 'row', marginTop: 15}} />
+        </View>
+        <Drawer.Section style={styles.drawerSection}>
+          <Drawer.Item
+            icon={({color, size}) => (
+              <Ionicons name="ios-home" color="#faaca8" size={size} />
+            )}
+            label="Trang chủ"
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+          <Drawer.Item
+            icon={({color, size}) => (
+              <Icon name="login-variant" color="#faaca8" size={size} />
+            )}
+            label="Đăng nhập"
+            onPress={() => this.props.navigation.navigate('Authentication')}
+          />
+        </Drawer.Section>
+      </View>
+    );
+    const mainJSX = this.state.token ? loginJSX : logoutJSX;
+    return <View style={styles.wrapper}>{mainJSX}</View>;
   }
 }
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
-    wrapper: { flex: 1},
-    infoContainer: {
-        padding:width/20,
-        flex: 8,
-    },
-    rowInfoContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#D6D6D6',
-        padding:20,
-        marginVertical:width/30,
-        borderRadius:15
-    },
-    infoText: {
-        fontFamily: 'Avenir',
-        color: '#394455',
-        fontWeight: '500',
-        marginHorizontal:width/15
-    }
+  wrapper: {flex: 1},
+  drawerSection: {
+    marginTop: 15,
+  },
+  userInfoSection: {
+    paddingLeft: 20,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
+    borderTopColor: '#faaca8',
+    borderTopWidth: 1,
+    justifyContent: 'flex-end',
+  },
+  drawerContent: {
+    flex: 1,
+  },
 });
