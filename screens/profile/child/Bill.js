@@ -56,19 +56,37 @@ export default class Bill extends Component {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + 'đ';
   }
 
+  gfg_Run = (today) => {
+    var dd = today.getDate();
+
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    today = dd + "/" + mm + "/" + yyyy;
+    console.log(today);
+    return today;
+  };
+
   renderItems(item) {
     return (
       <View style={styles.orderRow} key={item._id}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Order id:</Text>
+          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Mã đơn hàng :</Text>
           <Text style={{color: '#faaca8'}}>{item._id}</Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>OrderTime:</Text>
-          <Text style={{color: '#faaca8'}}>{item.dateOrder}</Text>
+          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Ngày đặt hàng :</Text>
+          <Text style={{color: '#faaca8'}}>{this.gfg_Run(new Date(item.dateOrder))}</Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Status:</Text>
+          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Trạng thái :</Text>
           <Text style={{color: '#faaca8'}}>
             {item.status == 0
               ? 'Chưa thanh toán'
@@ -78,7 +96,7 @@ export default class Bill extends Component {
           </Text>
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Total:</Text>
+          <Text style={{color: '#9A9A9A', fontWeight: 'bold'}}>Tổng tiền :</Text>
           <Text style={{color: '#faaca8', fontWeight: 'bold'}}>
             {this.currencyFormat(item.total)}
           </Text>
@@ -125,7 +143,6 @@ export default class Bill extends Component {
                 name="text-document-inverted"
                 color="#faaca8"
                 size={350}
-                
               />
             </View>
           )}

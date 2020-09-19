@@ -70,19 +70,19 @@ export default class Info extends Component {
         <ScrollView>
         <View style={styles.infoContainer}>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-unlock'} size={25} color={'#faaca8'} />
+            <Ionicons name={'md-lock'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
-              placeholder="old"
+              placeholder="Mật khẩu cũ "
               onChangeText={text => this.setState({ oldP: text })}
               value={this.state.oldP}
               underlineColorAndroid="transparent"/>
           </View>
           <View style={styles.rowInfoContainer}>
-            <Ionicons name={'md-unlock'} size={25} color={'#faaca8'} />
+            <Ionicons name={'md-lock'} size={25} color={'#faaca8'} />
             <TextInput
               style={styles.infoText}
-              placeholder="new"
+              placeholder="Mật khẩu mới "
               onChangeText={text => this.setState({ newP: text })}
               value={this.state.newP}
               underlineColorAndroid="transparent"/>

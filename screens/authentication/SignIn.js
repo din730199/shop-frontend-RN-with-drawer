@@ -61,6 +61,7 @@ export default class SignIn extends Component {
         <TextInput
           style={inputStyle}
           placeholder="Email"
+          keyboardType = 'email-address'
           value={email}
           onChangeText={text => this.setState({email: text})}
         />

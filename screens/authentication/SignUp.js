@@ -86,13 +86,13 @@ export default class SignUp extends Component {
         />
         <TextInput
           style={inputStyle}
-          placeholder="Address"
+          placeholder="Địa chỉ"
           value={this.state.address}
           onChangeText={text => this.setState({address: text})}
         />
         <TextInput
           style={inputStyle}
-          placeholder="Numberphone"
+          placeholder="Số điện thoại"
           value={this.state.numberphone}
           keyboardType = 'numeric'
           onChangeText={text => this.setState({numberphone: text})}
